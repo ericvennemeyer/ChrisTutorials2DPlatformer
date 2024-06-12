@@ -12,7 +12,13 @@ var animation_locked: bool = false
 var direction: Vector2 = Vector2.ZERO
 var was_in_air: bool = false
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+
+
+func _ready() -> void:
+	animation_tree.active = true
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -36,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if direction.x != 0 && animated_sprite_2d.animation != "jump_end":
+	if direction.x != 0:
 		velocity.x = direction.x * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
@@ -47,42 +53,35 @@ func _physics_process(delta: float) -> void:
 
 
 func update_animation():
-	if not animation_locked:
-		if not is_on_floor():
-			animated_sprite_2d.play("jump_loop")
-		else:
-			if direction.x != 0:
-				animated_sprite_2d.play("run")
-			else:
-				animated_sprite_2d.play("idle")
+	animation_tree.set("parameters/Move/blend_position", direction.x)
 
 
 func update_facing_direction():
 	if direction.x < 0:
-		animated_sprite_2d.flip_h = true
+		sprite.flip_h = true
 	elif direction.x > 0:
-		animated_sprite_2d.flip_h = false
+		sprite.flip_h = false
 
 
 func jump():
 	velocity.y = jump_velocity
-	animated_sprite_2d.play("jump_start")
+#	animated_sprite_2d.play("jump_start")
 	animation_locked = true
 
 
 func jump_double():
 	velocity.y = double_jump_velocity
-	animated_sprite_2d.play("jump_double")
+#	animated_sprite_2d.play("jump_double")
 	animation_locked = true
 	has_double_jumped = true
 
 
 func land():
-	animated_sprite_2d.play("jump_end")
+#	animated_sprite_2d.play("jump_end")
 	animation_locked = true
 	was_in_air = false
 
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if ["jump_end", "jump_start", "jump_double()"].has(animated_sprite_2d.animation):
-		animation_locked = false
+#func _on_animated_sprite_2d_animation_finished() -> void:
+#	if ["jump_end", "jump_start", "jump_double()"].has(animated_sprite_2d.animation):
+#		animation_locked = false
