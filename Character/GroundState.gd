@@ -14,9 +14,9 @@ func state_process(delta):
 
 
 func state_input(event: InputEvent):
-	if Input.is_action_just_pressed("jump"):
+	if event.is_action_pressed("jump"):
 		jump()
-	if Input.is_action_just_pressed("attack"):
+	if event.is_action_pressed("attack"):
 		attack()
 
 
