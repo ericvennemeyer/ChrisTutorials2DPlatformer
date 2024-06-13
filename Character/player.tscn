@@ -430,6 +430,7 @@ font_size = 12
 size = Vector2(25, 50)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_qiowy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -493,6 +494,8 @@ script = ExtResource("11_n28jx")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="SwordAttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 monitoring = false
 script = ExtResource("13_7nq60")
 
