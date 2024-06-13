@@ -1,6 +1,8 @@
 class_name Damageable
 extends Node
 
+signal on_hit(node: Node, damage_taken: int)
+
 @export var actor: CharacterBody2D
 @export var health: int = 20:
 	get:
@@ -12,7 +14,5 @@ extends Node
 
 func hit(damage: int):
 	health -= damage
-	print("Snail took " + str(damage) + " damage")
+	on_hit.emit(actor, damage)
 	
-	if health <= 0:
-		actor.queue_free()

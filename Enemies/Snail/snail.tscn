@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://py2uj3m4hnuo"]
+[gd_scene load_steps=18 format=3 uid="uid://py2uj3m4hnuo"]
 
+[ext_resource type="Script" path="res://Enemies/Snail/snail.gd" id="1_oac72"]
 [ext_resource type="Texture2D" uid="uid://dlfy85jq6jt3m" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="1_qbwvu"]
 [ext_resource type="Script" path="res://Enemies/Snail/Damageable.gd" id="2_mv2o3"]
 [ext_resource type="Texture2D" uid="uid://gbqxgunmvmbd" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/Dead-Sheet.png" id="2_vkj2s"]
+[ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="4_wx8yy"]
+[ext_resource type="Script" path="res://Character/state.gd" id="5_7jr5l"]
+[ext_resource type="Script" path="res://Character/HitState.gd" id="6_v8jhu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w5f5n"]
 size = Vector2(27, 26)
@@ -129,6 +133,7 @@ states/walk/position = Vector2(361.5, 99.75)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_syvpt"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_jfkl5")]
 
 [node name="Snail" type="CharacterBody2D"]
+script = ExtResource("1_oac72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 3)
@@ -150,3 +155,21 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("2_mv2o3")
 actor = NodePath("..")
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
+script = ExtResource("4_wx8yy")
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+current_state = NodePath("Walk")
+
+[node name="Walk" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_7jr5l")
+
+[node name="Dead" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_7jr5l")
+can_move = false
+
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "dead_state")]
+script = ExtResource("6_v8jhu")
+damageable = NodePath("../../Damageable")
+dead_state = NodePath("../Dead")

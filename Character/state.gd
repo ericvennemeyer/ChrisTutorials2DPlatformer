@@ -1,6 +1,7 @@
 class_name State
 extends Node
 
+signal interrupt_state(new_state: State) 
 
 @export var can_move: bool = true
 
