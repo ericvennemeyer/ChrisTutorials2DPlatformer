@@ -409,9 +409,7 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_aieis")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-32, -40)
-texture = ExtResource("6_m5b2r")
-centered = false
+texture = ExtResource("3_f8ho0")
 hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
