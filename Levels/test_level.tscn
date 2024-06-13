@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4yumcnunxcjm"]
+[gd_scene load_steps=7 format=3 uid="uid://c4yumcnunxcjm"]
 
 [ext_resource type="Texture2D" uid="uid://cs2xq0wmf23yd" path="res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="1_ej5ax"]
 [ext_resource type="PackedScene" uid="uid://c2iqlmf2hntm5" path="res://Character/player.tscn" id="2_1kkm5"]
 [ext_resource type="PackedScene" uid="uid://py2uj3m4hnuo" path="res://Enemies/Snail/snail.tscn" id="3_8thij"]
+[ext_resource type="PackedScene" uid="uid://bg4yqfg1wtxms" path="res://UI/health_changed_manager.tscn" id="4_62q33"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no7uv"]
 texture = ExtResource("1_ej5ax")
@@ -1467,3 +1468,5 @@ drag_vertical_enabled = true
 
 [node name="Snail" parent="." instance=ExtResource("3_8thij")]
 position = Vector2(151, 176)
+
+[node name="HealthChangedManager" parent="." instance=ExtResource("4_62q33")]
