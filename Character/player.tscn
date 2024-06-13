@@ -493,6 +493,7 @@ script = ExtResource("11_n28jx")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="SwordAttackArea" type="Area2D" parent="."]
+monitoring = false
 script = ExtResource("13_7nq60")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAttackArea"]
