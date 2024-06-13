@@ -1,4 +1,7 @@
+class_name Player
 extends CharacterBody2D
+
+signal facing_direction_changed(facing_right: bool)
 
 @export var speed: float = 200.0
 
@@ -42,3 +45,5 @@ func update_facing_direction():
 		sprite.flip_h = true
 	elif direction.x > 0:
 		sprite.flip_h = false
+		
+	facing_direction_changed.emit(!sprite.flip_h)

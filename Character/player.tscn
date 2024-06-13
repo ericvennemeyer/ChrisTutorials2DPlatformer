@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c2iqlmf2hntm5"]
+[gd_scene load_steps=47 format=3 uid="uid://c2iqlmf2hntm5"]
 
 [ext_resource type="Script" path="res://Character/player.gd" id="1_qiowy"]
 [ext_resource type="Texture2D" uid="uid://b8qh1fj5bda1q" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_vu4gl"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Character/Attack.gd" id="11_h2pu6"]
 [ext_resource type="Script" path="res://Character/StateDebugLabel.gd" id="11_n28jx"]
 [ext_resource type="Script" path="res://Character/SwordAttackArea.gd" id="13_7nq60"]
+[ext_resource type="Script" path="res://Character/FacingCollisionShape2D.gd" id="14_y5cfl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aieis"]
 radius = 8.0
@@ -501,8 +502,11 @@ script = ExtResource("13_7nq60")
 actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAttackArea"]
-position = Vector2(28.5, -1)
+position = Vector2(29, 2.08165e-12)
 shape = SubResource("RectangleShape2D_6wvve")
+script = ExtResource("14_y5cfl")
+facing_left_position = Vector2(-29, 2.08165e-12)
+facing_right_position = Vector2(29, 2.08165e-12)
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
