@@ -493,11 +493,12 @@ vertical_alignment = 1
 script = ExtResource("11_n28jx")
 state_machine = NodePath("../CharacterStateMachine")
 
-[node name="SwordAttackArea" type="Area2D" parent="."]
+[node name="SwordAttackArea" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
 script = ExtResource("13_7nq60")
+actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAttackArea"]
 position = Vector2(28.5, -1)

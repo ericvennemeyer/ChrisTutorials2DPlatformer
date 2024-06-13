@@ -1,7 +1,7 @@
 class_name Damageable
 extends Node
 
-signal on_hit(node: Node, damage_taken: int)
+signal on_hit(node: Node, damage_taken: int, direction: int)
 
 @export var actor: CharacterBody2D
 @export var health: int = 20:
@@ -12,9 +12,9 @@ signal on_hit(node: Node, damage_taken: int)
 		health = value
 @export var death_animation: String = "dead"
 
-func hit(damage: int):
+func hit(damage: int, direction: int):
 	health -= damage
-	on_hit.emit(actor, damage)
+	on_hit.emit(actor, damage, direction)
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
